@@ -1,11 +1,6 @@
 import Link from "next/link";
-import {
-  ArrowUpRight,
-  FileImage,
-  Globe2,
-  Landmark,
-  Link2,
-} from "lucide-react";
+import { ArrowUpRight, FileImage, Globe2, Landmark, Link2 } from "lucide-react";
+import type { Route } from "next";
 
 const services = [
   {
@@ -47,11 +42,11 @@ export default function QuickServices() {
     <section className="py-16 sm:py-20">
       <div className="mb-8 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
         <div>
-          <p className="text-sm font-bold text-primary">QUICK ACCESS</p>
+          <p className="text-primary text-sm font-bold">QUICK ACCESS</p>
           <h2 className="mt-1 text-2xl font-extrabold tracking-tight sm:text-3xl">
             Start with what you need
           </h2>
-          <p className="mt-2 max-w-2xl text-sm leading-6 text-muted-foreground">
+          <p className="text-muted-foreground mt-2 max-w-2xl text-sm leading-6">
             প্রয়োজনীয় ডিজিটাল পরিষেবা এবং টুলস কয়েকটি ক্লিকেই খুঁজে নিন।
           </p>
         </div>
@@ -64,23 +59,21 @@ export default function QuickServices() {
           return (
             <Link
               key={service.title}
-              href={service.href}
-              className="group rounded-2xl border border-border/70 bg-card p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 hover:shadow-lg"
-            >
+              href={service.href as Route}
+              className="group border-border/70 bg-card hover:border-primary/30 rounded-2xl border p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
               <div className="flex items-start justify-between">
                 <span
-                  className={`flex size-11 items-center justify-center rounded-xl ${service.className}`}
-                >
+                  className={`flex size-11 items-center justify-center rounded-xl ${service.className}`}>
                   <Icon className="size-5" />
                 </span>
-                <ArrowUpRight className="size-4 text-muted-foreground transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-primary" />
+                <ArrowUpRight className="text-muted-foreground group-hover:text-primary size-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </div>
 
               <h3 className="mt-5 text-base font-bold">{service.title}</h3>
-              <p className="mt-1 text-xs font-semibold text-primary">
+              <p className="text-primary mt-1 text-xs font-semibold">
                 {service.bengali}
               </p>
-              <p className="mt-3 text-sm leading-6 text-muted-foreground">
+              <p className="text-muted-foreground mt-3 text-sm leading-6">
                 {service.description}
               </p>
             </Link>
