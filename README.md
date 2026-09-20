@@ -159,3 +159,24 @@ src/
     ├── card-crop/
     └── ...
 ```
+
+## 👨‍💻 Author
+
+### Rishik Roy
+
+Frontend Web & Mobile App Developer
+
+I build modern web and mobile experiences with a focus on clean UI, usability, and practical digital products.
+
+**GitHub:** [@rishik-24](https://github.com/rishik-24)
+
+---
+
+<p align="center">
+  Built with ❤️ by <a href="https://github.com/rishik-24">Rishik Roy</a>
+  <br />
+  <br />
+  <strong>i need links.</strong>
+  <br />
+  Useful links. Useful tools. One place.
+</p>
