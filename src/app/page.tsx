@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import HomePage from "@/components/Home/HomePage";
 
 export const metadata: Metadata = {
-  title: "Open Concept Bangla",
+  title: "I Need Links",
   description:
     "Government portals, useful digital resources and browser-based card tools for everyday users.",
 };
