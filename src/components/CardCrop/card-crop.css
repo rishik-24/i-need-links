@@ -1,0 +1,428 @@
+/*
+ * Card Crop Tools - design tokens and component classes.
+ *
+ * NOTE: these rules are plain (unlayered) CSS, so they win over Tailwind utilities
+ * that set the same property. The components therefore never combine a `cc-*`
+ * class with a utility for the same property (use the `cc-*-sm` / `cc-*-block` modifiers).
+ *
+ * Visual language matches the /government page: soft peach/blue hero, white
+ * rounded cards on the page background, orange -> red accent, pastel icon tiles.
+ *
+ * Theme: `CardToolSelector` sets `data-cc-theme="light|dark"` on `.cc-root` by
+ * reading your site's theme (html.dark / data-theme / body colour). Before
+ * hydration, `html.dark` / `[data-theme=dark]` is honoured directly (no flash).
+ * Layout is done with Tailwind utilities in the components; this file only holds
+ * colours and the reusable look of surfaces, buttons, notices and tiles.
+ */
+
+.cc-root {
+  --cc-text: #0f172b;
+  --cc-muted: #5b6b80;
+  --cc-surface: #ffffff;
+  --cc-surface-2: #f3f5f8;
+  --cc-modal: #f1f3f6;
+  --cc-border: #e1e6ec;
+  --cc-accent: #ff6300;
+  --cc-accent-2: #fb3432;
+  --cc-accent-text: #e2540a;
+  --cc-accent-soft: rgba(255, 99, 0, 0.09);
+  --cc-accent-border: rgba(255, 99, 0, 0.32);
+  --cc-shadow: 0 1px 2px rgba(15, 23, 43, 0.05), 0 10px 28px -12px rgba(15, 23, 43, 0.18);
+  --cc-overlay: rgba(15, 23, 43, 0.55);
+  --cc-hero:
+    radial-gradient(55% 75% at 100% 0%, #ffe8d0 0%, rgba(255, 232, 208, 0) 72%),
+    radial-gradient(60% 80% at 0% 100%, #dcedff 0%, rgba(220, 237, 255, 0) 72%), #ffffff;
+  --cc-hero-border: rgba(255, 99, 0, 0.18);
+  --cc-header: linear-gradient(90deg, #fff6ea 0%, #ffffff 55%, #eef6ff 100%);
+
+  --cc-ok-bg: #ecfdf3;
+  --cc-ok-fg: #067647;
+  --cc-ok-border: #abefc6;
+  --cc-info-bg: #eff6ff;
+  --cc-info-fg: #1d4ed8;
+  --cc-info-border: #bfdbfe;
+  --cc-err-bg: #fef2f2;
+  --cc-err-fg: #b42318;
+  --cc-err-border: #fecaca;
+  --cc-warn-bg: #fffaeb;
+  --cc-warn-fg: #93370d;
+  --cc-warn-border: #fedf89;
+
+  --cc-c-orange: #ea580c;
+  --cc-c-orange-bg: #fff0e4;
+  --cc-c-blue: #1d6fe8;
+  --cc-c-blue-bg: #e6f0ff;
+  --cc-c-green: #0f9d6b;
+  --cc-c-green-bg: #dff7ec;
+  --cc-c-purple: #7c3aed;
+  --cc-c-purple-bg: #f0e8ff;
+  --cc-c-rose: #e11d48;
+  --cc-c-rose-bg: #ffe6ec;
+  --cc-c-slate: #475569;
+  --cc-c-slate-bg: #e8ecf1;
+
+  color: var(--cc-text);
+}
+
+.cc-root[data-cc-theme="dark"],
+:is(.dark, [data-theme="dark"]) .cc-root:not([data-cc-theme]) {
+  --cc-text: #f4f4f5;
+  --cc-muted: #a1a1aa;
+  --cc-surface: #232323;
+  --cc-surface-2: #2b2b2b;
+  --cc-modal: #1a1a1a;
+  --cc-border: #363636;
+  --cc-accent: #ff7a26;
+  --cc-accent-2: #f0453f;
+  --cc-accent-text: #ff9152;
+  --cc-accent-soft: rgba(255, 122, 38, 0.14);
+  --cc-accent-border: rgba(255, 122, 38, 0.4);
+  --cc-shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 12px 30px -12px rgba(0, 0, 0, 0.6);
+  --cc-overlay: rgba(0, 0, 0, 0.65);
+  --cc-hero:
+    radial-gradient(55% 75% at 100% 0%, #43281a 0%, rgba(67, 40, 26, 0) 72%),
+    radial-gradient(60% 80% at 0% 100%, #15283b 0%, rgba(21, 40, 59, 0) 72%), #212121;
+  --cc-hero-border: rgba(255, 122, 38, 0.22);
+  --cc-header: linear-gradient(90deg, #2b211b 0%, #232323 55%, #1d2530 100%);
+
+  --cc-ok-bg: #0f2a1c;
+  --cc-ok-fg: #6ce9a6;
+  --cc-ok-border: #17603a;
+  --cc-info-bg: #10233f;
+  --cc-info-fg: #93c5fd;
+  --cc-info-border: #1e3a8a;
+  --cc-err-bg: #331616;
+  --cc-err-fg: #fda29b;
+  --cc-err-border: #7a271a;
+  --cc-warn-bg: #33260a;
+  --cc-warn-fg: #fec84b;
+  --cc-warn-border: #7a4b0b;
+
+  --cc-c-orange: #ff9152;
+  --cc-c-orange-bg: rgba(255, 122, 38, 0.16);
+  --cc-c-blue: #6aa8ff;
+  --cc-c-blue-bg: rgba(59, 130, 246, 0.18);
+  --cc-c-green: #4ade9c;
+  --cc-c-green-bg: rgba(34, 197, 130, 0.16);
+  --cc-c-purple: #b794ff;
+  --cc-c-purple-bg: rgba(139, 92, 246, 0.2);
+  --cc-c-rose: #ff7b95;
+  --cc-c-rose-bg: rgba(244, 63, 94, 0.18);
+  --cc-c-slate: #b4bdc9;
+  --cc-c-slate-bg: rgba(148, 163, 184, 0.16);
+}
+
+/* ------------------------------ surfaces ------------------------------ */
+
+.cc-hero {
+  background: var(--cc-hero);
+  border: 1px solid var(--cc-hero-border);
+  border-radius: 2rem;
+  box-shadow: var(--cc-shadow);
+}
+
+.cc-card {
+  background: var(--cc-surface);
+  border: 1px solid var(--cc-border);
+  border-radius: 1.25rem;
+  box-shadow: var(--cc-shadow);
+}
+
+.cc-inset {
+  background: var(--cc-surface-2);
+  border: 1px solid var(--cc-border);
+  border-radius: 1rem;
+}
+
+.cc-muted {
+  color: var(--cc-muted);
+}
+
+.cc-accent-text {
+  color: var(--cc-accent-text);
+}
+
+.cc-modal-bg {
+  background: var(--cc-modal);
+  color: var(--cc-text);
+}
+
+.cc-modal-header {
+  background: var(--cc-header);
+  border-bottom: 1px solid var(--cc-border);
+}
+
+.cc-bar {
+  background: var(--cc-surface);
+  border-top: 1px solid var(--cc-border);
+}
+
+.cc-overlay {
+  background: var(--cc-overlay);
+  backdrop-filter: blur(3px);
+}
+
+/* Hero badge: white pill, orange spaced caps, tinted icon disc. */
+.cc-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 0.9rem 0.35rem 0.4rem;
+  border-radius: 9999px;
+  background: var(--cc-surface);
+  border: 1px solid var(--cc-accent-border);
+  color: var(--cc-accent-text);
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.cc-badge-icon {
+  display: inline-flex;
+  height: 1.5rem;
+  width: 1.5rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  background: var(--cc-accent-soft);
+  font-size: 0.8rem;
+  letter-spacing: 0;
+}
+
+.cc-headline-accent {
+  color: var(--cc-accent);
+}
+
+/* --------------------------- icon tiles / tones ------------------------ */
+
+.cc-tile {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.9rem;
+  font-weight: 800;
+  background: var(--cc-tone-bg, var(--cc-c-orange-bg));
+  color: var(--cc-tone, var(--cc-c-orange));
+}
+
+.cc-tone-orange { --cc-tone: var(--cc-c-orange); --cc-tone-bg: var(--cc-c-orange-bg); }
+.cc-tone-blue { --cc-tone: var(--cc-c-blue); --cc-tone-bg: var(--cc-c-blue-bg); }
+.cc-tone-green { --cc-tone: var(--cc-c-green); --cc-tone-bg: var(--cc-c-green-bg); }
+.cc-tone-purple { --cc-tone: var(--cc-c-purple); --cc-tone-bg: var(--cc-c-purple-bg); }
+.cc-tone-rose { --cc-tone: var(--cc-c-rose); --cc-tone-bg: var(--cc-c-rose-bg); }
+.cc-tone-slate { --cc-tone: var(--cc-c-slate); --cc-tone-bg: var(--cc-c-slate-bg); }
+
+.cc-tool {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  text-align: left;
+  background: var(--cc-surface);
+  border: 1px solid var(--cc-border);
+  border-radius: 1.25rem;
+  box-shadow: var(--cc-shadow);
+  transition: border-color 0.15s ease, transform 0.15s ease;
+}
+
+.cc-tool:hover {
+  border-color: var(--cc-accent-border);
+  transform: translateY(-2px);
+}
+
+.cc-tool:active {
+  transform: translateY(0);
+}
+
+.cc-arrow {
+  display: inline-flex;
+  height: 2rem;
+  width: 2rem;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  background: var(--cc-accent-soft);
+  color: var(--cc-accent-text);
+  font-weight: 700;
+}
+
+/* ------------------------------- buttons ------------------------------ */
+
+.cc-btn {
+  display: inline-flex;
+  min-height: 2.75rem;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 0.6rem 1rem;
+  border-radius: 0.875rem;
+  border: 1px solid var(--cc-border);
+  background: var(--cc-surface);
+  color: var(--cc-text);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  line-height: 1.2;
+  transition: border-color 0.15s ease, background-color 0.15s ease, filter 0.15s ease;
+}
+
+.cc-btn:hover:not(:disabled) {
+  border-color: var(--cc-accent-border);
+  background: var(--cc-accent-soft);
+}
+
+.cc-btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.cc-btn-primary {
+  border-color: transparent;
+  background: linear-gradient(90deg, var(--cc-accent), var(--cc-accent-2));
+  color: #ffffff;
+  box-shadow: 0 8px 18px -8px rgba(251, 52, 50, 0.6);
+}
+
+.cc-btn-primary:hover:not(:disabled) {
+  border-color: transparent;
+  background: linear-gradient(90deg, var(--cc-accent), var(--cc-accent-2));
+  filter: brightness(1.06);
+}
+
+.cc-btn-block {
+  width: 100%;
+}
+
+.cc-btn-sm {
+  min-height: 2.25rem;
+  padding: 0.35rem 0.75rem;
+  font-size: 0.75rem;
+}
+
+.cc-btn-icon {
+  min-height: 2.5rem;
+  width: 2.5rem;
+  padding: 0;
+  border-radius: 9999px;
+  font-size: 1.25rem;
+  line-height: 1;
+}
+
+.cc-seg {
+  display: inline-flex;
+  overflow: hidden;
+  border: 1px solid var(--cc-border);
+  border-radius: 0.875rem;
+  background: var(--cc-surface);
+}
+
+.cc-seg > button {
+  min-height: 2.5rem;
+  padding: 0.4rem 0.9rem;
+  color: var(--cc-text);
+  font-size: 0.8125rem;
+  font-weight: 700;
+}
+
+.cc-seg > button[aria-selected="true"],
+.cc-seg > button[aria-checked="true"] {
+  background: linear-gradient(90deg, var(--cc-accent), var(--cc-accent-2));
+  color: #ffffff;
+}
+
+/* ------------------------------- notices ------------------------------ */
+
+.cc-notice {
+  border-radius: 0.875rem;
+  border: 1px solid transparent;
+  padding: 0.7rem 0.85rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1.45;
+}
+
+.cc-notice-success { background: var(--cc-ok-bg); color: var(--cc-ok-fg); border-color: var(--cc-ok-border); }
+.cc-notice-info { background: var(--cc-info-bg); color: var(--cc-info-fg); border-color: var(--cc-info-border); }
+.cc-notice-error { background: var(--cc-err-bg); color: var(--cc-err-fg); border-color: var(--cc-err-border); }
+.cc-notice-warn { background: var(--cc-warn-bg); color: var(--cc-warn-fg); border-color: var(--cc-warn-border); }
+
+/* -------------------------------- forms ------------------------------- */
+
+.cc-drop {
+  border: 2px dashed var(--cc-accent-border);
+  border-radius: 1.25rem;
+  background: var(--cc-surface);
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.cc-drop:hover,
+.cc-drop[data-dragging="true"] {
+  border-color: var(--cc-accent);
+  background: var(--cc-accent-soft);
+}
+
+.cc-input {
+  width: 100%;
+  border: 1px solid var(--cc-border);
+  border-radius: 0.75rem;
+  background: var(--cc-surface);
+  color: var(--cc-text);
+  padding: 0.65rem 0.8rem;
+  font-size: 0.9rem;
+}
+
+.cc-input-sm {
+  width: auto;
+  padding: 0.35rem 0.6rem;
+  font-size: 0.75rem;
+}
+
+.cc-root input[type="range"] {
+  accent-color: var(--cc-accent);
+}
+
+.cc-root input[type="checkbox"] {
+  accent-color: var(--cc-accent);
+}
+
+.cc-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  border-radius: 9999px;
+  border: 1px solid var(--cc-border);
+  background: var(--cc-surface);
+  padding: 0.3rem 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.cc-value {
+  border-radius: 9999px;
+  border: 1px solid var(--cc-accent-border);
+  background: var(--cc-surface);
+  color: var(--cc-accent-text);
+  font-size: 0.6875rem;
+  font-weight: 800;
+  text-align: center;
+}
+
+/* Keyboard focus that is visible on every surface. */
+.cc-root :is(button, a, input, select, [tabindex]):focus-visible {
+  outline: 2px solid var(--cc-accent);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cc-tool,
+  .cc-btn,
+  .cc-drop {
+    transition: none;
+  }
+  .cc-tool:hover {
+    transform: none;
+  }
+}
